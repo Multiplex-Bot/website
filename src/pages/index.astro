@@ -1,0 +1,59 @@
+---
+import BaseLayout from "~/layouts/BaseLayout.astro";
+import Button from "~/components/Button.astro";
+import Card from "~/components/Card.astro";
+
+import "~/styles/index.scss";
+---
+
+<BaseLayout title="Multiplex">
+    <main>
+        <div class="hero">
+            <div class="title">
+                The
+                <span class="accented">Discord</span>
+                proxying bot for
+                <span class="accented">everyone</span>.
+            </div>
+            <div class="description">
+                Multiplex lets you send messages as different personas!
+            </div>
+
+            <div class="buttons">
+                <Button
+                    backgroundColor="var(--accent)"
+                    textColor="var(--background-primary)"
+                    href="https://discord.com/api/oauth2/authorize?client_id=1032459450415579249&permissions=275414902848&scope=bot%20applications.commands"
+                    icon="ic:sharp-discord"
+                >
+                    Invite to server!
+                </Button>
+                <Button
+                    backgroundColor="var(--accent)"
+                    textColor="var(--background-primary)"
+                    href="https://discord.gg/yEpGFevc2t"
+                    icon="ic:round-question-answer"
+                >
+                    Join the support server!
+                </Button>
+            </div>
+        </div>
+
+        <div class="cards">
+            <Card title="What is Multiplex?">
+                Multiplex is a Discord bot that uses webhooks to allow you to
+                proxy messages (as in: send messages with a different name and
+                profile picture).
+            </Card>
+            <Card title="Focused on the users.">
+                Multiplex focuses on having the best user experience of any
+                proxy bot. To this end, it uses slash-commands to ensure that it
+                is as easy as possible to get started using the bot. 
+            </Card>
+            <Card title="Open Source.">
+                Multiplex is fully open-source, meaning you can see exactly how
+                the bot works!
+            </Card>
+        </div>
+    </main>
+</BaseLayout>

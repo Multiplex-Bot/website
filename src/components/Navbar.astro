@@ -1,0 +1,72 @@
+---
+interface NavbarEntry {
+    name: string;
+    href: string;
+}
+
+interface Props {
+    entries: NavbarEntry[];
+}
+
+const { entries } = Astro.props;
+---
+
+<style lang="scss">
+    header {
+        position: absolute;
+        inset: 0;
+        block-size: fit-content;
+
+        .navbar {
+            max-inline-size: 1280px;
+            display: flex;
+            margin-inline: auto;
+            padding: 20px;
+            z-index: 50;
+            align-items: center;
+            gap: 30px;
+
+            @media only screen and (max-width: 350px) {
+                flex-direction: column;
+            }
+
+            .logo {
+                display: flex;
+                align-items: center;
+                font-size: 24px;
+                font-weight: bold;
+                color: var(--text);
+                text-decoration: none;
+            }
+
+            .entries {
+                display: flex;
+                flex-direction: row;
+                gap: 10px;
+
+                a {
+                    color: var(--accent);
+                    font-size: 16px;
+                    text-decoration: none;
+                }
+            }
+        }
+    }
+</style>
+
+<header>
+    <div class="navbar">
+        <a href="/" class="logo">
+            <img
+                src="/favicon.svg"
+                width="32"
+                height="32"
+                alt="Multiplex Logo"
+            />
+            <span>Multiplex</span>
+        </a>
+        <div class="entries">
+            {entries.map((entry) => <a href={entry.href}>{entry.name}</a>)}
+        </div>
+    </div>
+</header>

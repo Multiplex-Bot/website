@@ -1,0 +1,32 @@
+---
+import { Icon } from "astro-icon";
+
+interface Props {
+    textColor?: string;
+    backgroundColor?: string;
+    href?: string;
+    icon?: string;
+}
+
+const { textColor, backgroundColor, href, icon } = Astro.props;
+---
+
+<style lang="scss" define:vars={{ textColor, backgroundColor }}>
+    .button {
+        background-color: var(--backgroundColor);
+        color: var(--textColor);
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        padding: 10px;
+        border-radius: 4px;
+        font-size: 18px;
+        font-weight: bold;
+        text-decoration: none;
+    }
+</style>
+
+<a class="button" href={href}>
+    {icon && <Icon name={icon} size="20" />}
+    <slot />
+</a>

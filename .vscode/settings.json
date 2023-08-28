@@ -1,0 +1,26 @@
+{
+    "[astro]": {
+        "editor.tabSize": 4,
+        "editor.detectIndentation": false,
+        "editor.insertSpaces": true,
+        "editor.formatOnSave": true
+    },
+    "[json]": {
+        "editor.tabSize": 4,
+        "editor.detectIndentation": false,
+        "editor.insertSpaces": true,
+        "editor.formatOnSave": true
+    },
+    "[scss]": {
+        "editor.tabSize": 4,
+        "editor.detectIndentation": false,
+        "editor.insertSpaces": true,
+        "editor.formatOnSave": true
+    },
+    "[typescript]": {
+        "editor.tabSize": 4,
+        "editor.detectIndentation": false,
+        "editor.insertSpaces": true,
+        "editor.formatOnSave": true
+    }
+}

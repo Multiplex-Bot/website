@@ -1,0 +1,23 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+import BaseLayout from "./BaseLayout.astro";
+
+import "~/styles/docs.scss";
+import Sidebar from "~/components/Sidebar.astro";
+
+interface Props {
+    data: CollectionEntry<"docs">["data"];
+}
+
+const { data } = Astro.props;
+---
+
+<BaseLayout title={`Multiplex Docs - ${data.title}`}>
+    <main>
+        <Sidebar />
+        <article lang="en-US">
+            <slot />
+        </article>
+    </main>
+</BaseLayout>

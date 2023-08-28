@@ -1,0 +1,31 @@
+header {
+    position: relative;
+
+    @media only screen and (max-width: 768px) {
+        background-color: var(--background-secondary);
+    }
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    max-inline-size: 1280px;
+    margin-inline: auto;
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+    flex-grow: 1;
+    width: 100%;
+
+    @media only screen and (max-width: 768px) {
+        flex-direction: column;
+    }
+
+    article {
+        padding-inline: 10px;
+        block-size: 100%;
+    }
+}

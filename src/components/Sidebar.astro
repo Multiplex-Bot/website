@@ -1,0 +1,113 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { getCollection } from "astro:content";
+
+const categories = [
+    { id: "welcome", name: "Welcome", index: 0 },
+    { id: "getting-started", name: "Getting Started", index: 1 },
+];
+
+const entries = (await getCollection("docs")).sort((a, b) =>
+    a.data.title.localeCompare(b.data.title)
+);
+const grouped = entries.reduce(
+    (group: Record<string, CollectionEntry<"docs">[]>, entry) => {
+        const category = entry.id.split("/")[0];
+
+        group[category] = group[category] ?? [];
+        group[category].push(entry);
+
+        return group;
+    },
+    {}
+);
+
+const currentPage = Astro.url.pathname;
+---
+
+<style lang="scss">
+    aside {
+        background-color: var(--background-secondary);
+        padding: 10px;
+        border-start-start-radius: 8px;
+        border-start-end-radius: 8px;
+        flex: 0 0 auto;
+
+        @media only screen and (max-width: 768px) {
+            border-start-start-radius: 0;
+            border-start-end-radius: 0;
+        }
+
+        .category {
+            p {
+                font-weight: bold;
+                margin-block: 5px;
+            }
+
+            ul {
+                padding: 0;
+                margin: 0;
+
+                li {
+                    list-style-type: none;
+                    padding-inline: 16px;
+                    padding-block: 6px;
+
+                    &.current-page {
+                        background-color: var(--accent);
+                        border-radius: 4px;
+
+                        a {
+                            color: var(--background-secondary);
+                        }
+                    }
+
+                    a {
+                        text-decoration: none;
+                        color: var(--accent);
+                    }
+                }
+            }
+        }
+    }
+</style>
+
+<aside>
+    {
+        // this is the best code ever
+        Object.keys(grouped)
+            .map((categoryId) => {
+                const category = categories.find(
+                    (category) => category.id == categoryId
+                ) as (typeof categories)[0];
+
+                return category;
+            })
+            .sort((a, b) => a.index - b.index)
+            .map((category) => {
+                return (
+                    <div class="category">
+                        <p>{category.name}</p>
+                        <ul>
+                            {grouped[category.id].map((entry) => {
+                                return (
+                                    <li
+                                        class={
+                                            (currentPage ==
+                                                `/docs/${entry.slug}` &&
+                                                "current-page") ||
+                                            ""
+                                        }
+                                    >
+                                        <a href={`/docs/${entry.slug}`}>
+                                            {entry.data.title}
+                                        </a>
+                                    </li>
+                                );
+                            })}
+                        </ul>
+                    </div>
+                );
+            })
+    }
+</aside>
